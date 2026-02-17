@@ -1,0 +1,24 @@
+name: CI Notificacion NTFY
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v3
+
+      - name: Ejecutar Hola Mundo
+        run: node index.js
+
+      - name: Enviar notificacion a ntfy
+        run: |
+          curl -H "Title: Nueva actualizacion en main" \
+               -H "Priority: high" \
+               -d "Se hizo push al repositorio Practica4 CI" \
+               https://ntfy.sh/devops-itla
